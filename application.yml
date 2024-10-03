@@ -23,22 +23,22 @@ proxy:
     description: Application which demonstrates the basics of a Shiny app
     container-cmd: ["R", "-e", "shinyproxy::run_01_hello()"]
     container-image: openanalytics/shinyproxy-demo
-    container-network: sp-example-net
+    container-network: shiny-net
   - id: 06_tabsets
     container-cmd: ["R", "-e", "shinyproxy::run_06_tabsets()"]
     container-image: openanalytics/shinyproxy-demo
-    container-network: sp-example-net
+    container-network: shiny-net
   - id: SIprecisa
     container-cmd: ["R", "-e", "SIprecisa::run_app()"]
     container-image: siprecisa:latest
-    container-network: sp-example-net
+    container-network: shiny-net
     minimum-seats-available: 1
     allow-container-re-use: false
     hide-navbar-on-main-page-link: true
   - id: SIconfronta
     container-cmd: ["R", "-e", "SIconfronta::run_app()"]
     container-image: siconfronta:latest
-    container-network: sp-example-net
+    container-network: shiny-net
     minimum-seats-available: 1
     allow-container-re-use: false
     hide-navbar-on-main-page-link: true
