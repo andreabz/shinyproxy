@@ -1,0 +1,20 @@
+name: shinyproxy
+services:
+  shiny-server:
+    container_name: shinyproxy
+    image: openanalytics/shinyproxy:3.1.1
+    restart: unless-stopped
+    volumes:
+      - ${PWD}/config/application.yml:/opt/shinyproxy/application.yml
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    ports:
+      - ${IFACE}:${PORT}:8080
+    group_add:
+      - "${DOCKER_GROUP:-999}"
+    networks:
+      - shiny-net
+
+networks:
+  shiny-net:
+    name: shiny-net
+    external: true

@@ -1,0 +1,34 @@
+proxy:
+  title: ARPAL ShinyProxy
+  logo-url: https://www.openanalytics.eu/shinyproxy/logo.png
+  default-proxy-max-lifetime: 120
+  default-max-instances: 5
+  max-total-instances: 10
+  port: 8080
+  authentication: none
+  support:
+    mail-to-address: andrea.bazzano@arpal.liguria.it
+  docker:
+      internal-networking: true
+      container-network: "shiny-net"
+  specs:
+  - id: SIprecisa
+    container-cmd: ["R", "-e", "SIprecisa::run_app()"]
+    container-image: arpal/siprecisa:latest
+    container-network: "${proxy.docker.container-network}"
+    minimum-seats-available: 1
+    allow-container-re-use: false
+    hide-navbar-on-main-page-link: true
+  - id: SIconfronta
+    container-cmd: ["R", "-e", "SIconfronta::run_app()"]
+    container-image: arpal/siconfronta:latest
+    container-network: "${proxy.docker.container-network}"
+    minimum-seats-available: 1
+    allow-container-re-use: false
+    hide-navbar-on-main-page-link: true
+
+logging:
+  file:
+    shinyproxy.log
+  level:
+    root: WARN
